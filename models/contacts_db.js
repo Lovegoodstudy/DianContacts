@@ -38,7 +38,7 @@ exports.getContact = async function(params) {
 
 exports.deleteContact = async function(params) {
     let collection = db.collection(ConfigSet.COLLECTION_NAME);
-    let result = await collection.removeOne({
+    let result = await collection.deleteOne({
         _id: ObjectID(params.data._id)
     });
     return result;
