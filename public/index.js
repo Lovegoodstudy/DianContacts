@@ -156,7 +156,7 @@ function createInfList(data, parent) {
 }
 
 function getAllInf() {
-    getData("GET", "http://localhost:20170/contacts", null, function() {
+    getData("GET", "http://119.28.68.101:20170/contacts", null, function() {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 200) {
                 var data = JSON.parse(xmlhttp.responseText).result;
@@ -175,7 +175,7 @@ function getAllInf() {
 
 function deleteInf(event) {
     var obj = event.target;
-    getData("DELETE", "http://localhost:20170/contacts/" + obj.parentNode.parentNode.getAttribute('id'), null, function() {
+    getData("DELETE", "http://119.28.68.101:20170/contacts/" + obj.parentNode.parentNode.getAttribute('id'), null, function() {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 200) {
                 obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
@@ -221,7 +221,7 @@ function updateInf(event) {
         info.email = email.value;
         info.phone = phone.value;
         console.log(info);
-        getData("PUT", "http://localhost:20170/contacts/" + parent.getAttribute('id'), JSON.stringify(info), function() {
+        getData("PUT", "http://119.28.68.101:20170/contacts/" + parent.getAttribute('id'), JSON.stringify(info), function() {
             if (xmlhttp.readyState == 4) {
                 if (xmlhttp.status == 200) {
                     var data = JSON.parse(xmlhttp.responseText);
@@ -308,7 +308,7 @@ addEvent(document.forms.addInf, "submit", function(event) {
         info.email = form.email.value;
         info.phone = form.phone.value;
         console.log(info);
-        getData("POST", "http://localhost:20170/contacts", JSON.stringify(info), function() {
+        getData("POST", "http://119.28.68.101:20170/contacts", JSON.stringify(info), function() {
             if (xmlhttp.readyState == 4) {
                 if (xmlhttp.status == 200) {
                     window.location.href = "index.html";
