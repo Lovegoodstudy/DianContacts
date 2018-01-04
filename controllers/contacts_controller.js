@@ -17,11 +17,17 @@ exports.addContact = async params => {
 
 async function _validateAddContactParams(params) {
     // TODO
-    if (params.operation === 'post') {
-        return true;
-    } else {
+    let emailPattern = /^([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/;
+    let phonePattern = /(^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$)|(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/;
+    if (params.operation !== 'post')
         return false;
-    }
+    if ((params.data.name === null)||(params.data.name === ''))
+        return false;
+    if ((params.data.email === null)||(params.data.email === '')||(!emailPattern.test(params.data.email)))
+        return false;
+    if ((params.data.phone === null)||(params.data.phone === '')||(!phonePattern.test(params.data.phone)))
+        return false;
+    return true;
 }
 
 exports.getContact = async params => {
@@ -69,9 +75,15 @@ exports.updateContact = async params => {
 };
 
 async function _validateUpdateContactParams(params) {
-    if (params.operation === 'update') {
-        return true;
-    } else {
+    let emailPattern = /^([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/;
+    let phonePattern = /(^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$)|(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/;
+    if (params.operation !== 'update')
         return false;
-    }
+    if ((params.data.name === null)||(params.data.name === ''))
+        return false;
+    if ((params.data.email === null)||(params.data.email === '')||(!emailPattern.test(params.data.email)))
+        return false;
+    if ((params.data.phone === null)||(params.data.phone === '')||(!phonePattern.test(params.data.phone)))
+        return false;
+    return true;
 }
